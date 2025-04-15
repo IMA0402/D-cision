@@ -279,49 +279,49 @@ st.markdown(f"""
 
     # 📡 تأثير القناة التسويقية على نجاح الحملة
 st.subheader("📡 تأثير القناة التسويقية على نجاح الحملة")
-    fig3, ax3 = plt.subplots()
+fig3, ax3 = plt.subplots()
 
     # تفعيل دعم اللغة العربية
-    plt.rcParams['font.family'] = 'Arial'
-    plt.rcParams['axes.unicode_minus'] = False
+plt.rcParams['font.family'] = 'Arial'
+plt.rcParams['axes.unicode_minus'] = False
 
     # إعادة تشكيل النص العربي ليظهر بشكل صحيح
-    title = get_display(arabic_reshaper.reshape("نجاح الحملات حسب القناة"))
-    xlabel = get_display(arabic_reshaper.reshape("القناة التسويقية"))
-    ylabel = get_display(arabic_reshaper.reshape("عدد الحملات"))
-    legend_title = get_display(arabic_reshaper.reshape("النجاح"))
+title = get_display(arabic_reshaper.reshape("نجاح الحملات حسب القناة"))
+xlabel = get_display(arabic_reshaper.reshape("القناة التسويقية"))
+ylabel = get_display(arabic_reshaper.reshape("عدد الحملات"))
+legend_title = get_display(arabic_reshaper.reshape("النجاح"))
 
     # إعادة تشكيل النصوص العربية في القناة والنجاح
-    df["القناة_المعدلة"] = df["القناة"].map({
-        0: "إعلانات رقمية",
-        1: "وسائل التواصل",
-        2: "تلفزيون",
-        3: "راديو",
-        4: "بريد إلكتروني"
-    }).apply(lambda x: get_display(arabic_reshaper.reshape(x)))
+df["القناة_المعدلة"] = df["القناة"].map({
+    0: "إعلانات رقمية",
+    1: "وسائل التواصل",
+    2: "تلفزيون",
+    3: "راديو",
+    4: "بريد إلكتروني"
+}).apply(lambda x: get_display(arabic_reshaper.reshape(x)))
 
     # رسم المخطط مع استخدام الأعمدة المعدلة
-    sns.countplot(
-        data=df,
-        x="القناة_المعدلة",
-        hue="النجاح_المعدل",
-        palette="Blues",
-        ax=ax3
-    )
+sns.countplot(
+    data=df,
+    x="القناة_المعدلة",
+    hue="النجاح_المعدل",
+    palette="Blues",
+    ax=ax3
+)
 
     # إعادة تشكيل النصوص لعناوين المخطط
-    ax3.set_title(get_display(arabic_reshaper.reshape("نجاح الحملات حسب القناة")), fontsize=16, fontweight='bold')
-    ax3.set_xlabel(get_display(arabic_reshaper.reshape("القناة التسويقية")), fontsize=14)
-    ax3.set_ylabel(get_display(arabic_reshaper.reshape("عدد الحملات")), fontsize=14)
+ax3.set_title(get_display(arabic_reshaper.reshape("نجاح الحملات حسب القناة")), fontsize=16, fontweight='bold')
+ax3.set_xlabel(get_display(arabic_reshaper.reshape("القناة التسويقية")), fontsize=14)
+ax3.set_ylabel(get_display(arabic_reshaper.reshape("عدد الحملات")), fontsize=14)
 
     # إضافة وسيلة الإيضاح
-    ax3.legend(title=get_display(arabic_reshaper.reshape("النجاح")), fontsize=12, title_fontsize=14, loc="upper right")
+ax3.legend(title=get_display(arabic_reshaper.reshape("النجاح")), fontsize=12, title_fontsize=14, loc="upper right")
 
     # ضبط إعدادات الخطوط
-    plt.xticks(fontsize=12)
-    plt.yticks(fontsize=12)
+plt.xticks(fontsize=12)
+plt.yticks(fontsize=12)
 
-    st.pyplot(fig3)
+st.pyplot(fig3)
 
     # Convert back 'القناة' to categorical for proper ordering
 df_for_analysis = df.copy()
